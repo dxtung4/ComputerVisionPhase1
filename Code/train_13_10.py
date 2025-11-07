@@ -18,7 +18,7 @@ PATH_F8K_LABELS = os.path.join(BASE_DIR, "Project/Fisheye8K_all_including_train&
 PATH_VISDRONE_IMAGES = os.path.join(BASE_DIR, "Project/VisDrone_Dataset/VisDrone2019-DET-train/images")
 PATH_VISDRONE_YOLO_LABELS_ORIGINAL = os.path.join(BASE_DIR, "Project/VisDrone_Dataset/VisDrone2019-DET-train/labels")
 
-# Dữ liệu trung gian
+# Dữ liệu trung gian (nơi lưu kết quả của các bước xử lý).
 PATH_VISDRONE_YOLO_LABELS_MAPPED = os.path.join(BASE_DIR, "Project/visdrone_yolo_labels_mapped")
 PATH_SYNTHETIC_IMAGES = os.path.join(BASE_DIR, "Project/synthetic_fisheye/images")
 PATH_SYNTHETIC_LABELS = os.path.join(BASE_DIR, "Project/synthetic_fisheye/labels")
@@ -69,8 +69,8 @@ def remap_visdrone_yolo_labels(input_dir, output_dir):
 def generate_synthetic_data(img_dir, label_dir, out_img_dir, out_label_dir):
     print("Bắt đầu tạo dữ liệu mắt cá nhân tạo...")
     transform = A.Compose(
-        [A.GridDistortion(num_steps=5, distort_limit=0.7, p=1.0)],
-        bbox_params=A.BboxParams(format="yolo", label_fields=["class_labels"])
+        [A.GridDistortion(num_steps=5, distort_limit=0.7, p=1.0)], #Tạo hiệu ứng cong, lồi
+        bbox_params=A.BboxParams(format="yolo", label_fields=["class_labels"])#tính toán lại tọa độ bbox sau khi làm phồng
     )
 
     for img_file in tqdm(os.listdir(img_dir), desc="Generating synthetic data"):
