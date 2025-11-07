@@ -1,0 +1,29 @@
+# Bỏ qua file script predict
+predict.py
+
+# Các tệp model đã huấn luyện
+*.pt
+*.pth
+
+# Bỏ qua thư mục cài đặt IDE
+.idea/
+
+# Thư mục Models (chứa output)
+Models/
+
+# Dữ liệu (Rất lớn!)
+Project/
+data_phase1/
+
+# File cấu hình (nếu có thông tin nhạy cảm)
+# (Nếu file .yaml của bạn không có gì bí mật thì có thể xóa dòng dưới)
+*.yaml
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Môi trường ảo (nếu bạn dùng venv, .venv, etc.)
+venv/
+.venv/
+env/
