@@ -11,7 +11,7 @@ def main():
     MODEL_WEIGHTS = os.path.join(BASE_DIR, "Models/yolov11m.pt")
     PATH_TEACHER_OUTPUT = os.path.join(BASE_DIR, "Models/teacher_yolov11m_fix")
 
-    # --- 2. TẢI MÔ HÌNH ---
+    # --- 2. TẢI MÔ HÌNH --- (Yolo11m đã huấn luyện từ trước)
     print("--> Load mô hình YOLOv11m từ:", MODEL_WEIGHTS)
     teacher_model = YOLO(MODEL_WEIGHTS)
 
@@ -23,7 +23,7 @@ def main():
         epochs=50,
         imgsz=640,
         batch=4,
-        patience=20,
+        patience=20, #early stopping
         optimizer="AdamW",
         lr0=0.002,
         lrf=0.01,
@@ -46,8 +46,8 @@ def main():
         project=os.path.dirname(PATH_TEACHER_OUTPUT),
         name=os.path.basename(PATH_TEACHER_OUTPUT),
         exist_ok=True,
-        device=0,        # 🔥 dùng GPU (nếu có)
-        workers=2,        # ⚙️ tránh lỗi spawn tiến trình trên Windows
+        device=0,        # dùng GPU (nếu có)
+        workers=2,        # tránh lỗi spawn tiến trình trên Windows
         # --- Cấu hình Validation & Đánh giá ---
         conf = 0.001,  # Giữ nguyên (Tốt cho Recall/mAP).
         iou = 0.45,
